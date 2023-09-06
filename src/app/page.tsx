@@ -3,14 +3,12 @@ import Image from "next/image";
 import { Grid } from "@/components/grid";
 import { Slider } from "@/components/slider";
 import { RangeSlider } from "flowbite-react";
-import { data } from "./data.js";
-interface AccountData {
-  account: string;
-  locked: boolean;
-}
+import { data as rawData } from "./data.js";
+import { useState } from "react";
 
 // https://github.com/Hendrixer/fullstack-ai-nextjs
 export default function Home() {
+  const [data, setData] = useState(() => rawData);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div>

@@ -19,14 +19,14 @@ export function Slider({
   return (
     <Box sx={{ width: 300 }}>
       <MUSlider
-        aria-label="Always visible"
+        aria-label=""
         defaultValue={0}
         getAriaValueText={valuetext}
         step={1}
         marks={marks}
         min={-5}
         max={5}
-        valueLabelDisplay="on"
+        valueLabelDisplay="auto"
         onChange={onChange}
       />
     </Box>
