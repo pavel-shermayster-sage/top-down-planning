@@ -26,20 +26,24 @@ export default function Home() {
 
   const onChange = (item: any, value: number) => {
     const newItem = { ...item };
-    newItem.total = rawDataMap[item.expenseId].total * (1 + value / 100);
-    newItem.sibling = newItem.sibling.map((sib: any) => {
-      // prevent breaking on leaf percentage change
-      return {
-        ...sib,
-        total: rawDataMap[sib.expenseId].total * (1 + value / 100),
-        sibling: sib.sibling.map((grandSib: any) => {
-          return {
-            ...grandSib,
-            total: rawDataMap[grandSib.expenseId].total * (1 + value / 100),
-          };
-        }),
-      };
-    });
+    if (!item.isLocked) {
+      newItem.percentage = 1 + value / 100;
+      newItem.sibling = newItem.sibling.map((sib: any) => {
+        // prevent breaking on leaf percentage change
+        return {
+          ...sib,
+          percentage: sib.locked ? sib.percentage : 1 + value / 100, //1.01
+          sibling: sib.sibling.map((grandSib: any) => {
+            return {
+              ...grandSib,
+              percentage: grandSib.locked
+                ? grandSib.percentage
+                : 1 + value / 100,
+            };
+          }),
+        };
+      });
+    }
     console.log("value", { value, item });
 
     const newData = [...data].map((i) => {
@@ -137,7 +141,7 @@ export default function Home() {
                           {item.sibling.map((item) => {
                             return (
                               <div
-                                className="pl-12 flex flex-col gap-1 items-stretch"
+                                className="px-4 flex flex-col gap-1 items-stretch"
                                 key={item.expenseId}
                               >
                                 <Section
@@ -147,26 +151,7 @@ export default function Home() {
                                   onLockChange={(isLocked: boolean) => {
                                     console.log("isLocked", isLocked);
                                   }}
-                                >
-                                  {/*This is commented out until Jeff changes his mind again*/}
-                                  {/*{item.sibling.map((item: any) => {*/}
-                                  {/*  return (*/}
-                                  {/*    <div*/}
-                                  {/*      className="ml-6 flex flex-col gap-1 items-start"*/}
-                                  {/*      key={item.expenseId}*/}
-                                  {/*    >*/}
-                                  {/*      <Section*/}
-                                  {/*        key={item.expenseId}*/}
-                                  {/*        item={item}*/}
-                                  {/*        onChange={onChange}*/}
-                                  {/*        onLockChange={(isLocked: boolean) => {*/}
-                                  {/*          console.log("isLocked", isLocked);*/}
-                                  {/*        }}*/}
-                                  {/*      ></Section>*/}
-                                  {/*    </div>*/}
-                                  {/*  );*/}
-                                  {/*})}*/}
-                                </Section>
+                                ></Section>
                               </div>
                             );
                           })}

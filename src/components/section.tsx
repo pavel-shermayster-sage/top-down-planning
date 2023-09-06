@@ -58,12 +58,15 @@ export function Section({
           )}
           <span className={bold ? "font-bold" : ""}>{item.expenseName}</span>
         </div>
-        <div className="w-1/6">{Number(item.total).toFixed(2)}</div>
+        <div className="w-1/6">
+          {Number(item.total * (item.percentage || 1)).toFixed(2)}
+        </div>
         <div className="w-3/6">
           <Slider
             id="slider"
             className="text-xs"
             disabled={locked}
+            value={(item.percentage || 1) * 100 - 100}
             onChange={(_: any, value: any) => {
               onChange(item, value);
             }}

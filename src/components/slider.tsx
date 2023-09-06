@@ -14,7 +14,6 @@ export function Slider({ ...rest }: any) {
     <Box sx={{ width: 300 }}>
       <MUSlider
         aria-label=""
-        defaultValue={0}
         getAriaValueText={valuetext}
         step={1}
         marks={marks}
