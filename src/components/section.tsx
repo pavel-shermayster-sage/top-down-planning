@@ -20,10 +20,10 @@ export function Section({
   const [locked, setLocked] = useState(false);
   const [show, setShow] = useState(false);
   return (
-    <>
+    <div>
       <div
-        className={`flex justify-between  items-center w-full ${
-          bold ? "gap-8 h-20 " : "gap-8 h-14"
+        className={`flex justify-between items-center w-full ${
+          bold ? "gap-8 h-20 " : "gap-8 h-14 text-sm"
         }`}
       >
         {Boolean(children) && (
@@ -75,6 +75,6 @@ export function Section({
         </button>
       </div>
       {show && children}
-    </>
+    </div>
   );
 }

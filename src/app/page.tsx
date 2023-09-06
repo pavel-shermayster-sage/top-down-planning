@@ -8,16 +8,16 @@ import { Select } from "@/components/select";
 
 // https://github.com/Hendrixer/fullstack-ai-nextjs
 export default function Home() {
-  const [data, setData] = useState(() => rawData);
+  const [data, setData] = useState(() => [...rawData]);
   const onChange = (item: any, value: number) => {
     item.total = item.total * (1 + value / 100);
     item.sibling.forEach((sib: any) => {
-        // prevent breaking on leaf percentage change
+      // prevent breaking on leaf percentage change
+      sib.total = sib.total * (1 + value / 100);
+      item.sibling.forEach((sib: any) => {
         sib.total = sib.total * (1 + value / 100);
-        item.sibling.forEach((sib: any) => {
-          sib.total = sib.total * (1 + value / 100);
-        });
       });
+    });
     console.log("value", { value, item });
   };
 
@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col justify-between p-24">
+    <main className="flex min-h-screen flex-col justify-between p-24 w-full">
       <div>
         <h1 className="mb-4 text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
           Budget{" "}
@@ -61,25 +61,24 @@ export default function Home() {
               ]}
             ></Select>
           </div>
-          <div className="flex flex-col gap-1 items-start mt-10 border p-10 rounded">
+          <div className="flex flex-col gap-1 items-start items-stretch mt-10 border rounded lg:w-3/4 w-1/2">
             {data.map((item) => {
               return (
                 <>
-                  <Section
-                    bold={true}
-                    key={item.expenseId}
-                    item={item}
-                    onChange={onChange}
-                    onLockChange={(isLocked: boolean) => {
-                      console.log("isLocked", isLocked);
-                    }}
-                  />
+                  <div className="p-4 text-2xl border-b-stone-500">
+                    <Section
+                      bold={true}
+                      key={item.expenseId}
+                      item={item}
+                      onChange={onChange}
+                      onLockChange={(isLocked: boolean) => {
+                        console.log("isLocked", isLocked);
+                      }}
+                    />
+                  </div>
                   {item.sibling.map((item) => {
                     return (
-                      <div
-                        className="ml-6 flex flex-col gap-1 items-start"
-                        key={item.expenseId}
-                      >
+                      <div className="px-4 gap-1" key={item.expenseId}>
                         <Section
                           item={item}
                           bold={true}
@@ -91,7 +90,7 @@ export default function Home() {
                           {item.sibling.map((item) => {
                             return (
                               <div
-                                className="ml-6 flex flex-col gap-1 items-start"
+                                className="px-12 flex flex-col gap-1 items-stretch"
                                 key={item.expenseId}
                               >
                                 <Section
@@ -102,24 +101,23 @@ export default function Home() {
                                     console.log("isLocked", isLocked);
                                   }}
                                 >
-                                    {item.sibling.map((item:any) => {
-                                        return (
-                                            <div
-                                                className="ml-6 flex flex-col gap-1 items-start"
-                                                key={item.expenseId}
-                                            >
-                                                <Section
-                                                    key={item.expenseId}
-                                                    item={item}
-                                                    onChange={onChange}
-                                                    onLockChange={(isLocked: boolean) => {
-                                                        console.log("isLocked", isLocked);
-                                                    }}
-                                                >
-                                                </Section>
-                                            </div>
-                                        );
-                                    })}
+                                  {item.sibling.map((item: any) => {
+                                    return (
+                                      <div
+                                        className="ml-6 flex flex-col gap-1 items-start"
+                                        key={item.expenseId}
+                                      >
+                                        <Section
+                                          key={item.expenseId}
+                                          item={item}
+                                          onChange={onChange}
+                                          onLockChange={(isLocked: boolean) => {
+                                            console.log("isLocked", isLocked);
+                                          }}
+                                        ></Section>
+                                      </div>
+                                    );
+                                  })}
                                 </Section>
                               </div>
                             );
