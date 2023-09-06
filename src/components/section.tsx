@@ -58,7 +58,7 @@ export function Section({
           )}
           <span className={bold ? "font-bold" : ""}>{item.expenseName}</span>
         </div>
-        <div className="w-1/6">{item.total}</div>
+        <div className="w-1/6">{Number(item.total).toFixed(2)}</div>
         <div className="w-3/6">
           <Slider
             id="slider"
