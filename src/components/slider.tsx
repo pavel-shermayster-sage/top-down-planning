@@ -12,14 +12,17 @@ function valuetext(value: number) {
 export function Slider({
   id,
   onChange,
+  disabled,
 }: {
   id?: string;
+  disabled?: boolean;
   onChange?: (event: any, value: number | number[]) => void;
 }) {
   return (
     <Box sx={{ width: 300 }}>
       <MUSlider
         aria-label=""
+        disabled={disabled}
         defaultValue={0}
         getAriaValueText={valuetext}
         step={1}

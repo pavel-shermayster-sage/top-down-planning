@@ -19,6 +19,7 @@ export function Section({ item, onChange }: { item: any; onChange: any }) {
         <div>Name: {item.expenseName}</div>
         <Slider
           id="slider"
+          disabled={locked}
           onChange={(_, value) => {
             onChange(item, value);
           }}
