@@ -116,23 +116,24 @@ export default function Home() {
                                     console.log("isLocked", isLocked);
                                   }}
                                 >
-                                  {item.sibling.map((item: any) => {
-                                    return (
-                                      <div
-                                        className="ml-6 flex flex-col gap-1 items-start"
-                                        key={item.expenseId}
-                                      >
-                                        <Section
-                                          key={item.expenseId}
-                                          item={item}
-                                          onChange={onChange}
-                                          onLockChange={(isLocked: boolean) => {
-                                            console.log("isLocked", isLocked);
-                                          }}
-                                        ></Section>
-                                      </div>
-                                    );
-                                  })}
+                                  {/*This is commented out until Jeff changes his mind again*/}
+                                  {/*{item.sibling.map((item: any) => {*/}
+                                  {/*  return (*/}
+                                  {/*    <div*/}
+                                  {/*      className="ml-6 flex flex-col gap-1 items-start"*/}
+                                  {/*      key={item.expenseId}*/}
+                                  {/*    >*/}
+                                  {/*      <Section*/}
+                                  {/*        key={item.expenseId}*/}
+                                  {/*        item={item}*/}
+                                  {/*        onChange={onChange}*/}
+                                  {/*        onLockChange={(isLocked: boolean) => {*/}
+                                  {/*          console.log("isLocked", isLocked);*/}
+                                  {/*        }}*/}
+                                  {/*      ></Section>*/}
+                                  {/*    </div>*/}
+                                  {/*  );*/}
+                                  {/*})}*/}
                                 </Section>
                               </div>
                             );
