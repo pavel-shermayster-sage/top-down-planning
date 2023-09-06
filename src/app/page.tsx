@@ -70,7 +70,27 @@ export default function Home() {
                                   console.log("isLocked", isLocked);
                                 }}
                               />
+
+                                {Object.keys(item.expenseAmount).map((itemName) => {
+                                    return (
+                                        <div
+                                            className="ml-6 flex flex-col gap-1 items-start"
+                                            key={item.expenseId+itemName}
+                                        >
+                                            <Section
+                                                key={item.expenseId+itemName}
+                                                item={{expenseName:itemName, total: (item.expenseAmount as Record<string, number>)[itemName] }}
+                                                onChange={onChange}
+                                                onLockChange={(isLocked: boolean) => {
+                                                    console.log("isLocked", isLocked);
+                                                }}
+                                            />
+                                        </div>
+
+                                    );
+                                })}
                             </div>
+
                           );
                         })}
                       </div>
