@@ -1,3 +1,4 @@
+let runningId = 99;
 const communications = [
 {expenseId: 888, expenseName: "London - R&D - Accelerate ", sibling: [] , total: 500},
     {    expenseId: 888, expenseName: "London - R&D - SIP", sibling: [] , total: 500},
@@ -17,7 +18,7 @@ const communications = [
     { expenseId: 888, expenseName: "Chicago Sales - SIP", sibling: [] , total: 600},
     { expenseId: 888, expenseName: "Chicago Product  - Accelerate ", sibling: [] , total: 600},
     { expenseId: 888, expenseName: "Chicago Product  SIP", sibling: [] , total: 600},
-]
+];
 const snacks = [
     {expenseId: 888, expenseName: "London - R&D - Accelerate ", sibling: [] , total: 230},
     {   expenseId: 888, expenseName: "London - R&D - SIP", sibling: [] , total:  210},
@@ -220,6 +221,13 @@ const benefits = [
     { expenseId: 888, expenseName: "Chicago Product  SIP", sibling: [] , total: 1000},
 ]
 
+const processor = (arr) => {
+    return arr.map(item => {
+        runningId = runningId + 1;
+        return Object.assign(item, {expenseId:runningId})
+    })
+}
+
 export const data = [
     {
         expenseId: 0,
@@ -234,36 +242,31 @@ export const data = [
                 {
                     expenseId: 11,
                     expenseName: "Communications",
-                    expenseAmount: communications,
-                    sibling: communications,
+                    sibling: processor(communications),
                     total: 12600
                 },
                 {
                     expenseId: 12,
                     expenseName: "Snacks",
-                    expenseAmount: snacks,
-                    sibling: snacks,
+                    sibling: processor(snacks),
                     total: 3812
                 },
                 {
                     expenseId: 13,
                     expenseName: "Entertainment",
-                    expenseAmount: entertainment,
-                    sibling: entertainment,
+                    sibling: processor(entertainment),
                     total: 6300
                 },
                 {
                     expenseId: 14,
                     expenseName: "Furniture",
-                    expenseAmount: furniture,
-                    sibling: furniture,
+                    sibling: processor(furniture),
                     total: 30600
                 },
                 {
                     expenseId: 15,
                     expenseName: "Computers",
-                    expenseAmount: computers,
-                    sibling: computers,
+                    sibling: processor(computers),
                     total: 54580
                 },
             ],
@@ -277,22 +280,19 @@ export const data = [
                     {
                         expenseId: 21,
                         expenseName: "Flights",
-                        expenseAmount: flights,
-                        sibling: flights,
+                        sibling: processor(flights),
                         total: 73600
                     },
                     {
                         expenseId: 22,
                         expenseName: "Conferences",
-                        expenseAmount: conferences,
-                        sibling: conferences,
+                        sibling: processor(conferences),
                         total: 14450
                     },
                     {
                         expenseId: 23,
                         expenseName: "Hotels",
-                        expenseAmount: hotels,
-                        sibling: hotels,
+                        sibling: processor(hotels),
                         total: 28900
                     },
                 ],
@@ -306,22 +306,19 @@ export const data = [
                     {
                         expenseId: 31,
                         expenseName: "Insurance",
-                        expenseAmount: insurance,
-                        sibling: insurance,
+                        sibling: processor(insurance),
                         total: 19052
                     },
                     {
                         expenseId: 32,
                         expenseName: "Salary",
-                        expenseAmount: salary,
-                        sibling: salary,
+                        sibling: processor(salary),
                         total: 545800
                     },
                     {
                         expenseId: 33,
                         expenseName: "Benefits",
-                        expenseAmount: benefits,
-                        sibling: benefits,
+                        sibling: processor(benefits),
                         total: 25800
                     },
                 ],
