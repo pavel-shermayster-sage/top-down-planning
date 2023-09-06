@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import MUSlider from "@mui/material/Slider";
 const marks = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map((value) => ({
   value,
-  label: `${value}%`,
+  label: value % 2 === 0 ? "" : `${value}%`,
 }));
 
 function valuetext(value: number) {
