@@ -9,6 +9,21 @@ import { Select } from "@/components/select";
 // https://github.com/Hendrixer/fullstack-ai-nextjs
 export default function Home() {
   const [data, setData] = useState(() => [...rawData]);
+
+  const rawDataMap:Record<string, any> = {};
+  rawData.forEach(item => {
+      rawDataMap[item.expenseId] = item;
+      item.sibling.forEach(sib => {
+          rawDataMap[sib.expenseId] = sib;
+          sib.sibling.forEach(grandSib => {
+              rawDataMap[grandSib.expenseId] = grandSib;
+              grandSib.sibling.forEach((grandGrandSib:any) => {
+                  rawDataMap[grandGrandSib.expenseId] = grandGrandSib;
+              })
+          })
+      })
+  })
+
   const onChange = (item: any, value: number) => {
     item.total = item.total * (1 + value / 100);
     item.sibling.forEach((sib: any) => {
