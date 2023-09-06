@@ -73,7 +73,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col justify-between p-24 w-full">
+    <main className="flex min-h-screen flex-col justify-between p-24 w-full ">
       <div>
         <h1 className="mb-4 text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
           Budget{" "}
@@ -108,7 +108,7 @@ export default function Home() {
               ]}
             ></Select>
           </div>
-          <div className="flex flex-col gap-1 items-start items-stretch mt-10 border rounded lg:w-3/4 w-1/2">
+          <div className="flex flex-col gap-1 items-stretch mt-10 border rounded lg:w-1/2 w-3/4">
             {data.map((item) => {
               return (
                 <>
@@ -137,7 +137,7 @@ export default function Home() {
                           {item.sibling.map((item) => {
                             return (
                               <div
-                                className="px-12 flex flex-col gap-1 items-stretch"
+                                className="pl-12 flex flex-col gap-1 items-stretch"
                                 key={item.expenseId}
                               >
                                 <Section
