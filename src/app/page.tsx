@@ -32,11 +32,11 @@ export default function Home() {
         // prevent breaking on leaf percentage change
         return {
           ...sib,
-          percentage: sib.locked ? sib.percentage : 1 + value / 100, //1.01
+          percentage: sib.isLocked ? sib.percentage : 1 + value / 100, //1.01
           sibling: sib.sibling.map((grandSib: any) => {
             return {
               ...grandSib,
-              percentage: grandSib.locked
+              percentage: grandSib.isLocked
                 ? grandSib.percentage
                 : 1 + value / 100,
             };
@@ -69,6 +69,36 @@ export default function Home() {
       };
     });
 
+    setData(newData);
+  };
+
+  const onLockChange = (item: any, isLocked: boolean) => {
+    const newItem = {
+      ...item,
+      isLocked,
+    };
+    const newData = [...data].map((i) => {
+      if (i.expenseId === item.expenseId) {
+        return newItem;
+      }
+      return {
+        ...i,
+        sibling: i.sibling.map((sib: any) => {
+          if (sib.expenseId === item.expenseId) {
+            return newItem;
+          }
+          return {
+            ...sib,
+            sibling: sib.sibling.map((grandSib: any) => {
+              if (grandSib.expenseId === item.expenseId) {
+                return newItem;
+              }
+              return grandSib;
+            }),
+          };
+        }),
+      };
+    });
     setData(newData);
   };
 
@@ -123,7 +153,7 @@ export default function Home() {
                       item={item}
                       onChange={onChange}
                       onLockChange={(isLocked: boolean) => {
-                        console.log("isLocked", isLocked);
+                        onLockChange(item, isLocked);
                       }}
                     />
                   </div>
@@ -135,7 +165,7 @@ export default function Home() {
                           bold={true}
                           onChange={onChange}
                           onLockChange={(isLocked: boolean) => {
-                            console.log("isLocked", isLocked);
+                            onLockChange(item, isLocked);
                           }}
                         >
                           {item.sibling.map((item) => {
@@ -149,7 +179,7 @@ export default function Home() {
                                   item={item}
                                   onChange={onChange}
                                   onLockChange={(isLocked: boolean) => {
-                                    console.log("isLocked", isLocked);
+                                    onLockChange(item, isLocked);
                                   }}
                                 ></Section>
                               </div>
