@@ -44,22 +44,54 @@ export default function Home() {
 							<option value="sip">SIP</option>
 						</select>
 					</div>
-					{data.map((item) => {
-						return (
-							<div key={item.expenseId} className="flex flex-col">
-								<div className="flex gap-8">
-									<div>{item.total}</div>
-									<div>{item.expenseName}</div>
-									<Slider
-										id="slider"
-										onChange={(_, value) => {
-											onChange(item, value);
-										}}
-									/>
-								</div>
-							</div>
-						);
-					})}
+                    {data.map((item) => {
+                        return (
+                            <div key={item.expenseId} className="flex flex-col">
+                                <div className="flex gap-8">
+                                    <div>{item.total}</div>
+                                    <div>{item.expenseName}</div>
+                                    <Slider
+                                        id="slider"
+                                        onChange={(_, value) => {
+                                            onChange(item, value)
+                                        }}
+                                    />
+                                </div>
+                                {item.sibling.map((item) => {
+                                    return (
+                                        <div key={item.expenseId} className="flex flex-col">
+                                            <div className="flex gap-8">
+                                                <div>{item.total}</div>
+                                                <div>{item.expenseName}</div>
+                                                <Slider
+                                                    id="slider"
+                                                    onChange={(_, value) => {
+                                                        onChange(item, value)
+                                                    }}
+                                                />
+                                            </div>
+                                            {item.sibling.map((item) => {
+                                                return (
+                                                    <div key={item.expenseId} className="flex flex-col">
+                                                        <div className="flex gap-8">
+                                                            <div>{item.total}</div>
+                                                            <div>{item.expenseName}</div>
+                                                            <Slider
+                                                                id="slider"
+                                                                onChange={(_, value) => {
+                                                                    onChange(item, value)
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        );
+                    })}
 				</div>
 			</div>
 			<div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex"></div>
