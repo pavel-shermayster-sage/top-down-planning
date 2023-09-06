@@ -11,12 +11,10 @@ function valuetext(value: number) {
 }
 export function Slider({
   id,
-  min = 0,
-  max = 10,
+  onChange,
 }: {
-  id: string;
-  min?: number;
-  max?: number;
+  id?: string;
+  onChange?: (event: any, value: number | number[]) => void;
 }) {
   return (
     <Box sx={{ width: 300 }}>
@@ -29,6 +27,7 @@ export function Slider({
         min={-5}
         max={5}
         valueLabelDisplay="on"
+        onChange={onChange}
       />
     </Box>
   );

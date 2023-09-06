@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { Grid } from "@/components/grid";
 import { Slider } from "@/components/slider";
@@ -8,14 +9,8 @@ interface AccountData {
   locked: boolean;
 }
 
-async function getData() {
-  return fetch("https://www.ag-grid.com/example-assets/row-data.json").then(
-    (result) => result.json()
-  );
-}
-
 // https://github.com/Hendrixer/fullstack-ai-nextjs
-export default async function Home() {
+export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div>
@@ -30,7 +25,12 @@ export default async function Home() {
                 <div className="flex gap-2">
                   <div>{i.total}</div>
                   <div>{i.expenseName}</div>
-                  <Slider id="slider" />
+                  <Slider
+                    id="slider"
+                    onChange={(_, value) => {
+                      console.log("value", value);
+                    }}
+                  />
                 </div>
               </div>
             );
