@@ -6,30 +6,31 @@ import { useState } from "react";
 import { Section } from "@/components/section";
 import { Select } from "@/components/select";
 
-// https://github.com/Hendrixer/fullstack-ai-nextjs
-export default function Home() {
-  const [data, setData] = useState(() => [...rawData]);
-
-  const rawDataMap: Record<string, any> = {};
+const initRawDataMap = () => {
+  let map: Record<string, any> = {};
   rawData.forEach((item) => {
-    rawDataMap[item.expenseId] = item;
+    map[item.expenseId] = item;
     item.sibling.forEach((sib) => {
-      rawDataMap[sib.expenseId] = sib;
+      map[sib.expenseId] = sib;
       sib.sibling.forEach((grandSib) => {
-        rawDataMap[grandSib.expenseId] = grandSib;
+        map[grandSib.expenseId] = grandSib;
         grandSib.sibling.forEach((grandGrandSib: any) => {
-          rawDataMap[grandGrandSib.expenseId] = grandGrandSib;
+          map[grandGrandSib.expenseId] = grandGrandSib;
         });
       });
     });
   });
+  return map;
+};
+// https://github.com/Hendrixer/fullstack-ai-nextjs
+export default function Home() {
+  const [data, setData] = useState(() => [...rawData]);
 
   const onChange = (item: any, value: number) => {
     const newItem = { ...item };
     if (!item.isLocked) {
       newItem.percentage = 1 + value / 100;
       newItem.sibling = newItem.sibling.map((sib: any) => {
-        // prevent breaking on leaf percentage change
         return {
           ...sib,
           percentage: sib.isLocked ? sib.percentage : 1 + value / 100, //1.01
