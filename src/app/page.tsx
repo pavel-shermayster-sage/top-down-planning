@@ -9,6 +9,11 @@ import { useState } from "react";
 // https://github.com/Hendrixer/fullstack-ai-nextjs
 export default function Home() {
   const [data, setData] = useState(() => rawData);
+  const onChange = (item: any, value: any) => {
+      console.log("value", {value,item});
+      item.percentage = value; // does not exist
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div>
@@ -17,16 +22,16 @@ export default function Home() {
           <span className="text-blue-600 dark:text-blue-500"> calculator</span>{" "}
         </h1>
         <div className="flex flex-col items-center justify-center">
-          {data.map((i) => {
+          {data.map((item) => {
             return (
-              <div key={i.expenseId} className="flex flex-col">
-                <div className="flex gap-2">
-                  <div>{i.total}</div>
-                  <div>{i.expenseName}</div>
+              <div key={item.expenseId} className="flex flex-col">
+                <div className="flex gap-8">
+                  <div>{item.total}</div>
+                  <div>{item.expenseName}</div>
                   <Slider
                     id="slider"
                     onChange={(_, value) => {
-                      console.log("value", value);
+                        onChange(item, value)
                     }}
                   />
                 </div>
