@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Grid } from "@/components/grid";
 import { Slider } from "@/components/slider";
 import { RangeSlider } from "flowbite-react";
-import { data } from './data.js'
+import { data } from "./data.js";
 interface AccountData {
   account: string;
   locked: boolean;
@@ -24,17 +24,17 @@ export default async function Home() {
           <span className="text-blue-600 dark:text-blue-500"> calculator</span>{" "}
         </h1>
         <div className="flex flex-col items-center justify-center">
-          {data.map(i => {
-            return <div className="flex flex-col">
-              <div className="flex gap-2">
-                <div>{i.total}</div>
-                <div>{i.expenseName}</div>
-              <Slider id="slider"/>
+          {data.map((i) => {
+            return (
+              <div key={i.expenseId} className="flex flex-col">
+                <div className="flex gap-2">
+                  <div>{i.total}</div>
+                  <div>{i.expenseName}</div>
+                  <Slider id="slider" />
+                </div>
               </div>
-
-            </div>
-              })
-          }
+            );
+          })}
         </div>
       </div>
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex"></div>
