@@ -26,34 +26,11 @@ export default function Home() {
           <span className="text-blue-600 dark:text-blue-500"> calculator</span>{" "}
         </h1>
         <div className="flex flex-col items-center justify-center">
-          <div className="flex gap-2">
-            <Select
-              id="department"
-              onChange={onSelectChange}
-              items={[
-                { value: "rnd", label: "R&D" },
-                { value: "sales", label: "Sales" },
-                { value: "product", label: "Product" },
-              ]}
-            ></Select>
-            <Select
-              id="location"
-              onChange={onSelectChange}
-              items={[
-                { value: "london", label: "London" },
-                { value: "tel-aviv", label: "Tel Aviv" },
-                { value: "chicago", label: "Chicago" },
-              ]}
-            ></Select>
-            <Select
-              id="project"
-              onChange={onSelectChange}
-              items={[
-                { value: "accelerator", label: "Accelerator" },
-                { value: "sip", label: "SIP" },
-              ]}
-            ></Select>
-          </div>
+            <div className="flex gap-2">
+                <Select id="department" onChange={onSelectChange} items={[{ value: "R&D", label: "R&D" }, { value: "Sales", label: "Sales"}, { value: "Product", label: "Product"}]}></Select>
+                <Select id="location" onChange={onSelectChange} items={[{ value: "London", label: "London" }, { value: "Tel-aviv", label: "Tel Aviv"}, { value: "Chicago", label: "Chicago"}]}></Select>
+                <Select id="project" onChange={onSelectChange} items={[{ value: "Accelerator", label: "Accelerator" }, { value: "SIP", label: "SIP"}]}></Select>
+            </div>
           <div className="flex flex-col gap-1 items-start mt-10 border p-10 rounded">
             {data.map((item) => {
               return (
