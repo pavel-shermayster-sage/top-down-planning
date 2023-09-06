@@ -12,6 +12,10 @@ export default function Home() {
   const onChange = (item: any, value: any) => {
     console.log("value", { value, item });
     item.percentage = value; // does not exist
+	};
+	
+	const onSelectChange = (event: any) => {
+    console.log(event.target.id, event.target.value);
   };
 
   return (
@@ -23,9 +27,9 @@ export default function Home() {
         </h1>
         <div className="flex flex-col items-center justify-center">
 				<div className="flex gap-2">
-						<Select id="department" items={[{ value: "rnd", name: "R&D" }, { value: "sales", name: "Sales"}, { value: "product", name: "Product"}]}></Select>
-						<Select id="location" items={[{ value: "london", name: "London" }, { value: "tel-aviv", name: "Tel Aviv"}, { value: "chicago", name: "Chicago"}]}></Select>
-						<Select id="project" items={[{ value: "accelerator", name: "Accelerator" }, { value: "sip", name: "SIP"}]}></Select>
+						<Select id="department" onChange={onSelectChange} items={[{ value: "rnd", label: "R&D" }, { value: "sales", label: "Sales"}, { value: "product", label: "Product"}]}></Select>
+						<Select id="location" onChange={onSelectChange} items={[{ value: "london", label: "London" }, { value: "tel-aviv", label: "Tel Aviv"}, { value: "chicago", label: "Chicago"}]}></Select>
+						<Select id="project" onChange={onSelectChange} items={[{ value: "accelerator", label: "Accelerator" }, { value: "sip", label: "SIP"}]}></Select>
 					</div>
           {data.map((item) => {
             return (
