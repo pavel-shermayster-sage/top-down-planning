@@ -4,6 +4,7 @@ import { Slider } from "@/components/slider";
 import { data as rawData } from "./data.js";
 import { useState } from "react";
 import { Section } from "@/components/section";
+import { Select } from "@/components/select";
 
 // https://github.com/Hendrixer/fullstack-ai-nextjs
 export default function Home() {
@@ -21,25 +22,11 @@ export default function Home() {
           <span className="text-blue-600 dark:text-blue-500"> calculator</span>{" "}
         </h1>
         <div className="flex flex-col items-center justify-center">
-          <div>
-            <select name="department" id="department">
-              <option value="select">Select</option>
-              <option value="rnd">R&D</option>
-              <option value="sales">Sales</option>
-              <option value="product">Product</option>
-            </select>
-            <select name="location" id="location">
-              <option value="select">Select</option>
-              <option value="london">London</option>
-              <option value="tel-aviv">Tel Aviv</option>
-              <option value="chicago">Chicago</option>
-            </select>
-            <select name="project" id="project">
-              <option value="select">Select</option>
-              <option value="accelerator">Accelerator</option>
-              <option value="sip">SIP</option>
-            </select>
-          </div>
+				<div className="flex gap-2">
+						<Select id="department" items={[{ value: "rnd", name: "R&D" }, { value: "sales", name: "Sales"}, { value: "product", name: "Product"}]}></Select>
+						<Select id="location" items={[{ value: "london", name: "London" }, { value: "tel-aviv", name: "Tel Aviv"}, { value: "chicago", name: "Chicago"}]}></Select>
+						<Select id="project" items={[{ value: "accelerator", name: "Accelerator" }, { value: "sip", name: "SIP"}]}></Select>
+					</div>
           {data.map((item) => {
             return (
               <>
