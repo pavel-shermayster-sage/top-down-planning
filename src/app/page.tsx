@@ -10,7 +10,7 @@ interface AccountData {
 const data = [
   {
     expenseId: 0,
-    expenseName: "Total",
+    expenseName: "Total Expenses",
     expenseAmount: "calc",
     sibling: [1, 2, 3],
   },
@@ -18,11 +18,73 @@ const data = [
     expenseId: 1,
     expenseName: "Office Expenses",
     expenseAmount: "calc",
-    sibling: [11, 12, 13],
+    sibling: [11, 12, 13, 14, 15],
+  },
+  {
+    expenseId: 2,
+    expenseName: "Travel Expenses",
+    expenseAmount: "calc",
+    sibling: [21, 22, 23],
+  },
+  {
+    expenseId: 3,
+    expenseName: "Admin Expenses",
+    expenseAmount: "calc",
+    sibling: [31, 32, 33],
   },
   {
     expenseId: 11,
     expenseName: "Communications",
+    expenseAmount: {},
+  },
+  {
+    expenseId: 12,
+    expenseName: "Snacks",
+    expenseAmount: {},
+  },
+  {
+    expenseId: 13,
+    expenseName: "Entertainment",
+    expenseAmount: {},
+  },
+  {
+    expenseId: 14,
+    expenseName: "Furniture",
+    expenseAmount: {},
+  },
+  {
+    expenseId: 15,
+    expenseName: "Computers",
+    expenseAmount: {},
+  },
+  {
+    expenseId: 21,
+    expenseName: "Flights",
+    expenseAmount: {},
+  },
+  {
+    expenseId: 22,
+    expenseName: "Conferences",
+    expenseAmount: {},
+  },
+  {
+    expenseId: 23,
+    expenseName: "Hotels",
+    expenseAmount: {},
+  },
+  {
+    expenseId: 31,
+    expenseName: "Insurance",
+    expenseAmount: {},
+  },
+  {
+    expenseId: 32,
+    expenseName: "Salary",
+    expenseAmount: {},
+  },
+  {
+    expenseId: 33,
+    expenseName: "Benefits",
     expenseAmount: {},
   },
 ];
