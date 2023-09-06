@@ -125,7 +125,6 @@ export default async function Home() {
           <div className="py-2">
             <Slider id="slider" min={0} max={10} />
           </div>
-          <Grid rowData={data} />
         </div>
       </div>
     </main>

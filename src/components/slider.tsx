@@ -1,3 +1,14 @@
+"use client";
+import Box from "@mui/material/Box";
+import MUSlider from "@mui/material/Slider";
+const marks = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map((value) => ({
+  value,
+  label: `${value}%`,
+}));
+
+function valuetext(value: number) {
+  return `${value}%`;
+}
 export function Slider({
   id,
   min = 0,
@@ -8,12 +19,17 @@ export function Slider({
   max?: number;
 }) {
   return (
-    <input
-      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-      type="range"
-      name="volume"
-      min={min}
-      max={max}
-    />
+    <Box sx={{ width: 300 }}>
+      <MUSlider
+        aria-label="Always visible"
+        defaultValue={0}
+        getAriaValueText={valuetext}
+        step={1}
+        marks={marks}
+        min={-5}
+        max={5}
+        valueLabelDisplay="on"
+      />
+    </Box>
   );
 }
