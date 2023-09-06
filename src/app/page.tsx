@@ -11,10 +11,9 @@ export default function Home() {
   const [data, setData] = useState(() => rawData);
   const onChange = (item: any, value: any) => {
       console.log("value", {value,item});
-      item.percentage = value; // does not exist
   }
 
-  return (
+    return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div>
         <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
@@ -23,18 +22,51 @@ export default function Home() {
         </h1>
         <div className="flex flex-col items-center justify-center">
           {data.map((item) => {
-            return (
+              return (
               <div key={item.expenseId} className="flex flex-col">
                 <div className="flex gap-8">
-                  <div>{item.total}</div>
-                  <div>{item.expenseName}</div>
-                  <Slider
+                <div>{item.total}</div>
+                <div>{item.expenseName}</div>
+                <Slider
                     id="slider"
                     onChange={(_, value) => {
                         onChange(item, value)
                     }}
                   />
                 </div>
+                  {item.sibling.map((item) => {
+                      return (
+                      <div key={item.expenseId} className="flex flex-col">
+                      <div className="flex gap-8">
+                          <div>{item.total}</div>
+                          <div>{item.expenseName}</div>
+                          <Slider
+                              id="slider"
+                              onChange={(_, value) => {
+                                  onChange(item, value)
+                              }}
+                          />
+                      </div>
+                          {item.sibling.map((item) => {
+                              return (
+                                  <div key={item.expenseId} className="flex flex-col">
+                                      <div className="flex gap-8">
+                                          <div>{item.total}</div>
+                                          <div>{item.expenseName}</div>
+                                          <Slider
+                                              id="slider"
+                                              onChange={(_, value) => {
+                                                  onChange(item, value)
+                                              }}
+                                          />
+                                      </div>
+
+                                  </div>
+                              );
+                          })}
+                      </div>
+                      );
+                  })}
               </div>
             );
           })}
