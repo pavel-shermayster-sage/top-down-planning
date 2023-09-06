@@ -9,9 +9,15 @@ import { Select } from "@/components/select";
 // https://github.com/Hendrixer/fullstack-ai-nextjs
 export default function Home() {
   const [data, setData] = useState(() => rawData);
-  const onChange = (item: any, value: any) => {
-    console.log("value", { value, item });
-    item.percentage = value; // does not exist
+  const onChange = (item: any, value: number) => {
+    item.total = item.total * (1 + value/100);
+    item.sibling && item.sibling.forEach((sib:any) => { // prevent breaking on leaf percentage change
+      sib.total =  sib.total * (1 + value/100);
+      item.sibling.forEach((sib:any) => {
+          sib.total =  sib.total * (1 + value/100);
+      });
+    });
+    console.log("value", { value, item});
   };
 
   const onSelectChange = (event: any) => {
@@ -86,11 +92,9 @@ export default function Home() {
                                                 }}
                                             />
                                         </div>
-
                                     );
                                 })}
                             </div>
-
                           );
                         })}
                       </div>
