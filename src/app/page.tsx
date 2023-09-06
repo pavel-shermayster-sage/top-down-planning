@@ -34,14 +34,16 @@ export default function Home() {
         return {
           ...sib,
           percentage: sib.isLocked ? sib.percentage : 1 + value / 100, //1.01
-          sibling: sib.isLocked ? sib.sibling : sib.sibling.map((grandSib: any) => {
-            return {
-              ...grandSib,
-              percentage: grandSib.isLocked
-                ? grandSib.percentage
-                : 1 + value / 100,
-            };
-          }),
+          sibling: sib.isLocked
+            ? sib.sibling
+            : sib.sibling.map((grandSib: any) => {
+                return {
+                  ...grandSib,
+                  percentage: grandSib.isLocked
+                    ? grandSib.percentage
+                    : 1 + value / 100,
+                };
+              }),
         };
       });
     }
@@ -111,8 +113,8 @@ export default function Home() {
     <main className="flex min-h-screen flex-col justify-between p-24 w-full ">
       <div>
         <h1 className="mb-4 text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-          Budget{" "}
-          <span className="text-blue-600 dark:text-blue-500"> calculator</span>{" "}
+          Top down budget{" "}
+          <span className="text-blue-600 dark:text-blue-500"> planner</span>{" "}
         </h1>
         <div className="flex flex-col items-center justify-center">
           <div className="flex gap-2">
