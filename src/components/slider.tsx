@@ -9,20 +9,11 @@ const marks = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map((value) => ({
 function valuetext(value: number) {
   return `${value}%`;
 }
-export function Slider({
-  id,
-  onChange,
-  disabled,
-}: {
-  id?: string;
-  disabled?: boolean;
-  onChange?: (event: any, value: number | number[]) => void;
-}) {
+export function Slider({ ...rest }: any) {
   return (
     <Box sx={{ width: 300 }}>
       <MUSlider
         aria-label=""
-        disabled={disabled}
         defaultValue={0}
         getAriaValueText={valuetext}
         step={1}
@@ -30,7 +21,7 @@ export function Slider({
         min={-5}
         max={5}
         valueLabelDisplay="auto"
-        onChange={onChange}
+        {...rest}
       />
     </Box>
   );

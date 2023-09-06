@@ -10,14 +10,16 @@ import { Select } from "@/components/select";
 export default function Home() {
   const [data, setData] = useState(() => rawData);
   const onChange = (item: any, value: number) => {
-    item.total = item.total * (1 + value/100);
-    item.sibling && item.sibling.forEach((sib:any) => { // prevent breaking on leaf percentage change
-      sib.total =  sib.total * (1 + value/100);
-      item.sibling.forEach((sib:any) => {
-          sib.total =  sib.total * (1 + value/100);
+    item.total = item.total * (1 + value / 100);
+    item.sibling &&
+      item.sibling.forEach((sib: any) => {
+        // prevent breaking on leaf percentage change
+        sib.total = sib.total * (1 + value / 100);
+        item.sibling.forEach((sib: any) => {
+          sib.total = sib.total * (1 + value / 100);
+        });
       });
-    });
-    console.log("value", { value, item});
+    console.log("value", { value, item });
   };
 
   const onSelectChange = (event: any) => {
@@ -32,16 +34,40 @@ export default function Home() {
           <span className="text-blue-600 dark:text-blue-500"> calculator</span>{" "}
         </h1>
         <div className="flex flex-col items-center justify-center">
-            <div className="flex gap-2">
-                <Select id="department" onChange={onSelectChange} items={[{ value: "R&D", label: "R&D" }, { value: "Sales", label: "Sales"}, { value: "Product", label: "Product"}]}></Select>
-                <Select id="location" onChange={onSelectChange} items={[{ value: "London", label: "London" }, { value: "Tel-aviv", label: "Tel Aviv"}, { value: "Chicago", label: "Chicago"}]}></Select>
-                <Select id="project" onChange={onSelectChange} items={[{ value: "Accelerator", label: "Accelerator" }, { value: "SIP", label: "SIP"}]}></Select>
-            </div>
+          <div className="flex gap-2">
+            <Select
+              id="department"
+              onChange={onSelectChange}
+              items={[
+                { value: "R&D", label: "R&D" },
+                { value: "Sales", label: "Sales" },
+                { value: "Product", label: "Product" },
+              ]}
+            ></Select>
+            <Select
+              id="location"
+              onChange={onSelectChange}
+              items={[
+                { value: "London", label: "London" },
+                { value: "Tel-aviv", label: "Tel Aviv" },
+                { value: "Chicago", label: "Chicago" },
+              ]}
+            ></Select>
+            <Select
+              id="project"
+              onChange={onSelectChange}
+              items={[
+                { value: "Accelerator", label: "Accelerator" },
+                { value: "SIP", label: "SIP" },
+              ]}
+            ></Select>
+          </div>
           <div className="flex flex-col gap-1 items-start mt-10 border p-10 rounded">
             {data.map((item) => {
               return (
                 <>
                   <Section
+                    bold={true}
                     key={item.expenseId}
                     item={item}
                     onChange={onChange}
@@ -57,46 +83,60 @@ export default function Home() {
                       >
                         <Section
                           item={item}
+                          bold={true}
                           onChange={onChange}
                           onLockChange={(isLocked: boolean) => {
                             console.log("isLocked", isLocked);
                           }}
-                        />
-                        {item.sibling.map((item) => {
-                          return (
-                            <div
-                              className="ml-6 flex flex-col gap-1 items-start"
-                              key={item.expenseId}
-                            >
-                              <Section
+                        >
+                          {item.sibling.map((item) => {
+                            return (
+                              <div
+                                className="ml-6 flex flex-col gap-1 items-start"
                                 key={item.expenseId}
-                                item={item}
-                                onChange={onChange}
-                                onLockChange={(isLocked: boolean) => {
-                                  console.log("isLocked", isLocked);
-                                }}
-                              />
-
-                                {Object.keys(item.expenseAmount).map((itemName) => {
-                                    return (
+                              >
+                                <Section
+                                  key={item.expenseId}
+                                  item={item}
+                                  onChange={onChange}
+                                  onLockChange={(isLocked: boolean) => {
+                                    console.log("isLocked", isLocked);
+                                  }}
+                                >
+                                  {Object.keys(item.expenseAmount).map(
+                                    (itemName) => {
+                                      return (
                                         <div
-                                            className="ml-6 flex flex-col gap-1 items-start"
-                                            key={item.expenseId+itemName}
+                                          className="ml-6 flex flex-col gap-1 items-start"
+                                          key={item.expenseId + itemName}
                                         >
-                                            <Section
-                                                key={item.expenseId+itemName}
-                                                item={{expenseName:itemName, total: (item.expenseAmount as Record<string, number>)[itemName] }}
-                                                onChange={onChange}
-                                                onLockChange={(isLocked: boolean) => {
-                                                    console.log("isLocked", isLocked);
-                                                }}
-                                            />
+                                          <Section
+                                            key={item.expenseId + itemName}
+                                            item={{
+                                              expenseName: itemName,
+                                              total: (
+                                                item.expenseAmount as Record<
+                                                  string,
+                                                  number
+                                                >
+                                              )[itemName],
+                                            }}
+                                            onChange={onChange}
+                                            onLockChange={(
+                                              isLocked: boolean
+                                            ) => {
+                                              console.log("isLocked", isLocked);
+                                            }}
+                                          />
                                         </div>
-                                    );
-                                })}
-                            </div>
-                          );
-                        })}
+                                      );
+                                    }
+                                  )}
+                                </Section>
+                              </div>
+                            );
+                          })}
+                        </Section>
                       </div>
                     );
                   })}
