@@ -76,7 +76,7 @@ export function Section({
           <button
             onClick={() => {
               setLocked((s) => !s);
-              onLockChange(item, !locked);
+              onLockChange(!locked);
             }}
           >
             {locked ? <UnLockIcon /> : <LockIcon />}

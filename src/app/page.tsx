@@ -102,6 +102,7 @@ export default function Home() {
         }),
       };
     });
+    console.log("onLockChange", { item, isLocked, newItem, newData });
     setData(newData);
   };
 
