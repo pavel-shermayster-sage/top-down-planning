@@ -113,20 +113,18 @@ async function getData() {
 // https://github.com/Hendrixer/fullstack-ai-nextjs
 export default async function Home() {
   const data = await getData();
-  console.log(data);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-        Budget{" "}
-        <span className="text-blue-600 dark:text-blue-500"> calculator</span>{" "}
-      </h1>
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+      <div>
+        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+          Budget{" "}
+          <span className="text-blue-600 dark:text-blue-500"> calculator</span>{" "}
+        </h1>
         <div className="flex flex-col items-center justify-center">
-          <div className="py-2">
-            <Slider id="slider" />
-          </div>
+          <Slider id="slider" />
         </div>
       </div>
+      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex"></div>
     </main>
   );
 }
