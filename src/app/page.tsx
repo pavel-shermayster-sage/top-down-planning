@@ -42,34 +42,41 @@ export default function Home() {
           </div>
           {data.map((item) => {
             return (
-              <div key={item.expenseId} className="flex flex-col">
-                <div className="flex gap-8">
-                  <div>{item.total}</div>
-                  <div>{item.expenseName}</div>
-                  <Slider
-                    id="slider"
-                    onChange={(_, value) => {
-                      onChange(item, value);
-                    }}
-                  />
-                </div>
+              <>
+                <Section
+                  key={item.expenseId}
+                  item={item}
+                  onChange={onChange}
+                  onLockChange={(isLocked: boolean) => {
+                    console.log("isLocked", isLocked);
+                  }}
+                />
                 {item.sibling.map((item) => {
                   return (
                     <div key={item.expenseId}>
-                      <Section item={item} onChange={onChange} />
+                      <Section
+                        item={item}
+                        onChange={onChange}
+                        onLockChange={(isLocked: boolean) => {
+                          console.log("isLocked", isLocked);
+                        }}
+                      />
                       {item.sibling.map((item) => {
                         return (
                           <Section
                             key={item.expenseId}
                             item={item}
                             onChange={onChange}
+                            onLockChange={(isLocked: boolean) => {
+                              console.log("isLocked", isLocked);
+                            }}
                           />
                         );
                       })}
                     </div>
                   );
                 })}
-              </div>
+              </>
             );
           })}
         </div>
