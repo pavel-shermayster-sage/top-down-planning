@@ -10,30 +10,62 @@ import { Select } from "@/components/select";
 export default function Home() {
   const [data, setData] = useState(() => [...rawData]);
 
-  const rawDataMap:Record<string, any> = {};
-  rawData.forEach(item => {
-      rawDataMap[item.expenseId] = item;
-      item.sibling.forEach(sib => {
-          rawDataMap[sib.expenseId] = sib;
-          sib.sibling.forEach(grandSib => {
-              rawDataMap[grandSib.expenseId] = grandSib;
-              grandSib.sibling.forEach((grandGrandSib:any) => {
-                  rawDataMap[grandGrandSib.expenseId] = grandGrandSib;
-              })
-          })
-      })
-  })
-
-  const onChange = (item: any, value: number) => {
-    item.total = item.total * (1 + value / 100);
-    item.sibling.forEach((sib: any) => {
-      // prevent breaking on leaf percentage change
-      sib.total = sib.total * (1 + value / 100);
-      item.sibling.forEach((sib: any) => {
-        sib.total = sib.total * (1 + value / 100);
+  const rawDataMap: Record<string, any> = {};
+  rawData.forEach((item) => {
+    rawDataMap[item.expenseId] = item;
+    item.sibling.forEach((sib) => {
+      rawDataMap[sib.expenseId] = sib;
+      sib.sibling.forEach((grandSib) => {
+        rawDataMap[grandSib.expenseId] = grandSib;
+        grandSib.sibling.forEach((grandGrandSib: any) => {
+          rawDataMap[grandGrandSib.expenseId] = grandGrandSib;
+        });
       });
     });
+  });
+
+  const onChange = (item: any, value: number) => {
+    const newItem = { ...item };
+    newItem.total = rawDataMap[item.expenseId].total * (1 + value / 100);
+    newItem.sibling = newItem.sibling.map((sib: any) => {
+      // prevent breaking on leaf percentage change
+      return {
+        ...sib,
+        total: rawDataMap[sib.expenseId].total * (1 + value / 100),
+        sibling: sib.sibling.map((grandSib: any) => {
+          return {
+            ...grandSib,
+            total: rawDataMap[grandSib.expenseId].total * (1 + value / 100),
+          };
+        }),
+      };
+    });
     console.log("value", { value, item });
+
+    const newData = [...data].map((i) => {
+      if (i.expenseId === item.expenseId) {
+        return newItem;
+      }
+      return {
+        ...i,
+        sibling: i.sibling.map((sib: any) => {
+          if (sib.expenseId === item.expenseId) {
+            return newItem;
+          }
+          return {
+            ...sib,
+            sibling: sib.sibling.map((grandSib: any) => {
+              if (grandSib.expenseId === item.expenseId) {
+                return newItem;
+              }
+              return grandSib;
+            }),
+          };
+        }),
+      };
+    });
+
+    setData(newData);
   };
 
   const onSelectChange = (event: any) => {
