@@ -33,7 +33,7 @@ export default function Home() {
         return {
           ...sib,
           percentage: sib.isLocked ? sib.percentage : 1 + value / 100, //1.01
-          sibling: sib.sibling.map((grandSib: any) => {
+          sibling: sib.isLocked ? sib.sibling : sib.sibling.map((grandSib: any) => {
             return {
               ...grandSib,
               percentage: grandSib.isLocked
